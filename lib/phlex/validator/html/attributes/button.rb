@@ -6,12 +6,12 @@ module Phlex::Validator::HTML
 		autofocus: _Boolean,
 		command: _Union(
 			Enum(
-				"show-modal",
-				"close",
-				"request-close",
-				"show-popover",
-				"hide-popover",
-				"toggle-popover",
+				:show_modal,
+				:close,
+				:request_close,
+				:show_popover,
+				:hide_popover,
+				:toggle_popover,
 			),
 			_String(/\A--/),
 		),
@@ -27,9 +27,9 @@ module Phlex::Validator::HTML
 		popovertarget: DOMID,
 		popovertargetaction: PopoverTargetAction,
 		type: Enum(
-			"submit",
-			"reset",
-			"button"
+			:submit,
+			:reset,
+			:button
 		),
 		value: String,
 	}.freeze

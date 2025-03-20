@@ -11,17 +11,17 @@ module Phlex::Validator::HTML
 		),
 		crossorigin: CrossOrigin,
 		decoding: Enum(
-			"sync",
-			"async",
-			"auto"
+			:sync,
+			:async,
+			:auto
 		),
 		elementtiming: String,
 		fetchpriority: FetchPriority,
 		height: UInt,
 		ismap: _Boolean,
 		loading: Enum(
-			"eager",
-			"lazy"
+			:eager,
+			:lazy
 		),
 		referrerpolicy: ReferrerPolicy,
 		sizes: String, # todo comma-separated list of sizes

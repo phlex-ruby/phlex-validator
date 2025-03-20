@@ -4,41 +4,41 @@ module Phlex::Validator::HTML
 	Attributes::Global = {
 		accesskey: Tokens,
 		autocapitalize: Enum(
-			"on",
-			"off",
-			"none",
-			"sentences",
-			"words",
-			"characters"
+			:on,
+			:off,
+			:none,
+			:sentences,
+			:words,
+			:characters
 		),
 		autocorrect: Token,
 		autofocus: _Boolean,
 		class: Tokens,
 		contenteditable: Enum(
-			"true",
-			"false",
-			"plaintext-only"
+			:true,
+			:false,
+			:plaintext_only
 		),
 		dir: _Union(
-			Token("auto"),
+			Token(:auto),
 			TextDirection,
 		),
 		draggable: EnumeratedBoolean,
 		enterkeyhint: Enum(
-			"enter",
-			"done",
-			"go",
-			"next",
-			"previous",
-			"search",
-			"send"
+			:enter,
+			:done,
+			:go,
+			:next,
+			:previous,
+			:search,
+			:send
 		),
 		exportparts: String, # TODO: investigate updating Phlex to comma-separate tokens passed to this attribute
 		hidden: _Union(
 			_Boolean,
 			Enum(
-				"hidden",
-				"until-found"
+				:hidden,
+				:until_found
 			)
 		),
 		id: DOMID,
@@ -56,9 +56,9 @@ module Phlex::Validator::HTML
 		popover: _Union(
 			_Boolean,
 			Enum(
-				"auto",
-				"hint",
-				"manual"
+				:auto,
+				:hint,
+				:manual
 			)
 		),
 		slot: Token,
@@ -67,7 +67,7 @@ module Phlex::Validator::HTML
 		tabindex: Integer,
 		title: String,
 		translate: Affirmation,
-		virtualkeyboardpolicy: Enum("auto", "manual"),
+		virtualkeyboardpolicy: Enum(:auto, :manual),
 		writingsuggestions: EnumeratedBoolean,
 	}.freeze
 end

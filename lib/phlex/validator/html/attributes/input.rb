@@ -77,7 +77,7 @@ module Phlex::Validator::HTML
 				**BaseInputAttributes,
 				accept: String,
 				autocomplete: Autocomplete,
-				capture: Enum("user", "environment"),
+				capture: Enum(:user, :environment),
 				list: DOMID,
 				multiple: _Boolean,
 				readonly: _Boolean,

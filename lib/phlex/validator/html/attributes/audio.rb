@@ -3,10 +3,7 @@
 module Phlex::Validator::HTML
 	Attributes::Audio = {
 		**Attributes::Global,
-		autoplay: {
-			type: _Boolean,
-			link: "https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio#autoplay",
-		},
+		autoplay: _Boolean,
 		controls: _Boolean,
 		controlslist: ControlsList,
 		crossorigin: CrossOrigin,
@@ -14,9 +11,9 @@ module Phlex::Validator::HTML
 		loop: _Boolean,
 		muted: _Boolean,
 		preload: Enum(
-			"none",
-			"metadata",
-			"auto"
+			:none,
+			:metadata,
+			:auto
 		),
 		src: String,
 	}.freeze

@@ -339,5 +339,40 @@ module Phlex::Validator::HTML
 			__validate__(attributes, Attributes::Global)
 			super
 		end
+
+		def meta(**attributes)
+			__validate__(attributes, Attributes::Meta)
+			super
+		end
+
+		def meter(**attributes)
+			__validate__(attributes, Attributes::Meter)
+			super
+		end
+
+		def nav(**attributes)
+			__validate__(attributes, Attributes::Global)
+			super
+		end
+
+		def noscript(**attributes)
+			__validate__(attributes, Attributes::Global)
+			super
+		end
+
+		def object(**attributes)
+			__validate__(attributes, Attributes::Object)
+			super
+		end
+
+		def ol(**attributes)
+			__validate__(attributes, Attributes::Ol)
+			super
+		end
+
+		def optgroup(**attributes)
+			__validate__(attributes, Attributes::Global)
+			super
+		end
 	end
 end

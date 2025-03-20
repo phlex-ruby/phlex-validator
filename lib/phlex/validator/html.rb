@@ -5,15 +5,12 @@
 module Phlex::Validator::HTML
 	extend Literal::Types
 
-	def self.Token(string)
-		_Union(
-			string,
-			string.tr("-", "_").to_sym
-		)
+	def self.Token(symbol)
+		_Union(symbol, symbol.name.tr("_", "-"))
 	end
 
 	def self.Enum(*tokens)
-		_Union(*tokens, *tokens.map { |it| it.tr("-", "_").to_sym })
+		_Union(*tokens, *tokens.map { |it| it.name.tr("_", "-") })
 	end
 
 	def self.SpaceSeparatedList(type)
@@ -78,15 +75,15 @@ module Phlex::Validator::HTML
 	# An integer or float that’s greater than zero
 	PositiveNumeric = _Constraint(Integer, Float, 0.., _Not(0), _Not(0.0))
 
-	Step = _Union(Token("any"), PositiveNumeric)
+	Step = _Union(Token(:any), PositiveNumeric)
 	TimeString = _String(/\A([01][0-9]|2[0-3]):([0-5][0-9])(:[0-5][0-9](\.\d{1,3})?)?\z/)
 	Token = _Union(String, Symbol)
 	Tokens = _Union(Token, _Array(Token))
 	UInt = _Integer(0..)
 	AutocompleteNamedGroup = _String(/\Asection-/)
-	Toggle = Enum("on", "off")
-	EnumeratedBoolean = Enum("true", "false")
-	Affirmation = Enum("yes", "no")
+	Toggle = Enum(:on, :off)
+	EnumeratedBoolean = Enum(:true, :false)
+	Affirmation = Enum(:yes, :no)
 
 	FormEncoding = _Union(
 		"application/x-www-form-urlencoded",
@@ -95,24 +92,24 @@ module Phlex::Validator::HTML
 	)
 
 	PopoverTargetAction = Enum(
-		"hide",
-		"show",
-		"toggle"
+		:hide,
+		:show,
+		:toggle
 	)
 
 	CrossOrigin = Enum(
-		"anonymous",
-		"use-credentials"
+		:anonymous,
+		:user_credentials
 	)
 
 	FetchPriority = Enum(
-		"high",
-		"low",
-		"auto"
+		:high,
+		:low,
+		:auto,
 	)
 
 	Sizes = _Union(
-		Token("any"),
+		Token(:any),
 		SpaceSeparatedList(
 			_String(/\A\d+[xX]\d+\z/)
 		),
@@ -129,118 +126,118 @@ module Phlex::Validator::HTML
 	DOMID = Token # TODO: We can actually verify that these IDs exist on the page
 
 	LinkRel = Enum(
-		"alternate",
-		"author",
-		"canonical",
-		"dns-prefetch",
-		"expect",
-		"help",
-		"license",
-		"manifest",
-		"me",
-		"modulepreload",
-		"next",
-		"pingback",
-		"preconnect",
-		"prefetch",
-		"preload",
-		"prerender",
-		"prev",
-		"privacy-policy",
-		"search",
-		"stylesheet",
-		"terms-of-service"
+		:alternate,
+		:author,
+		:canonical,
+		:dns_prefetch,
+		:expect,
+		:help,
+		:license,
+		:manifest,
+		:me,
+		:modulepreload,
+		:next,
+		:pingback,
+		:preconnect,
+		:prefetch,
+		:preload,
+		:prerender,
+		:prev,
+		:privacy_policy,
+		:search,
+		:stylesheet,
+		:terms_of_service
 	)
 
-	TextDirection = Enum("ltr", "rtl")
+	TextDirection = Enum(:ltr, :rtl)
 
 	InputMode = Enum(
-		"none",
-		"text",
-		"decimal",
-		"numeric",
-		"tel",
-		"search",
-		"email",
-		"url"
+		:none,
+		:text,
+		:decimal,
+		:numeric,
+		:tel,
+		:search,
+		:email,
+		:url
 	)
 
 	FormMethod = Enum(
-		"post",
-		"get",
-		"dialog"
+		:post,
+		:get,
+		:dialog
 	)
 
 	AutocompleteGroupingIdentifier = Enum(
-		"shipping",
-		"billing",
+		:shipping,
+		:billing,
 	)
 
 	AutocompleteRecipientType = Enum(
-		"home",
-		"work",
-		"mobile",
-		"fax",
-		"page",
+		:home,
+		:work,
+		:mobile,
+		:fax,
+		:page,
 	)
 
 	AutocompleteDigitalContact = Enum(
-		"tel",
-		"tel-country-code",
-		"tel-national",
-		"tel-area-code",
-		"tel-local",
-		"tel-extension",
-		"email",
-		"impp",
+		:tel,
+		:tel_country_code,
+		:tel_national,
+		:tel_area_code,
+		:tel_local,
+		:tel_extension,
+		:email,
+		:impp,
 	)
 
 	AutocompleteOther = Enum(
-		"name",
-		"honorific-prefix",
-		"given-name",
-		"additional-name",
-		"family-name",
-		"honorific-suffix",
-		"nickname",
-		"username",
-		"new-password",
-		"current-password",
-		"one-time-code",
-		"organization-title",
-		"organization",
-		"street-address",
-		"address-line1",
-		"address-line2",
-		"address-line3",
-		"address-level4",
-		"address-level3",
-		"address-level2",
-		"address-level1",
-		"country",
-		"country-name",
-		"postal-code",
-		"cc-name",
-		"cc-given-name",
-		"cc-additional-name",
-		"cc-family-name",
-		"cc-number",
-		"cc-exp",
-		"cc-exp-month",
-		"cc-exp-year",
-		"cc-csc",
-		"cc-type",
-		"transaction-currency",
-		"transaction-amount",
-		"language",
-		"bday",
-		"bday-day",
-		"bday-month",
-		"bday-year",
-		"sex",
-		"url",
-		"photo",
-		"webauthn",
+		:name,
+		:honorific_prefix,
+		:given_name,
+		:additional_name,
+		:family_name,
+		:honorific_suffix,
+		:nickname,
+		:username,
+		:new_password,
+		:current_password,
+		:one_time_code,
+		:organization_title,
+		:organization,
+		:street_address,
+		:address_line1,
+		:address_line2,
+		:address_line3,
+		:address_level4,
+		:address_level3,
+		:address_level2,
+		:address_level1,
+		:country,
+		:country_name,
+		:postal_code,
+		:cc_name,
+		:cc_given_name,
+		:cc_additional_name,
+		:cc_family_name,
+		:cc_number,
+		:cc_exp,
+		:cc_exp_month,
+		:cc_exp_year,
+		:cc_csc,
+		:cc_type,
+		:transaction_currency,
+		:transaction_amount,
+		:language,
+		:bday,
+		:bday_day,
+		:bday_month,
+		:bday_year,
+		:sex,
+		:url,
+		:photo,
+		:webauthn,
 	)
 
 	Autocomplete = _Union(

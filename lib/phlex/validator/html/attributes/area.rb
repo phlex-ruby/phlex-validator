@@ -11,10 +11,10 @@ module Phlex::Validator::HTML
 		referrerpolicy: ReferrerPolicy,
 		rel: ARel,
 		shape: Enum(
-			"rect",
-			"circle",
-			"poly",
-			"default"
+			:rect,
+			:circle,
+			:poly,
+			:default
 		),
 		target: Target,
 	}.freeze
