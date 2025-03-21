@@ -67,6 +67,7 @@ test "time[datetime] with week" do
 	assert_valid_html { time(datetime: "2013-W46") }
 	assert_valid_html { time(datetime: "2013-W52") }
 	assert_valid_html { time(datetime: "2015-W53") }
+	assert_valid_html { time(datetime: "2020-W53") } # leap year
 
 	refute_valid_html { time(datetime: "2013-W1") }
 	refute_valid_html { time(datetime: "2013-W54") }
@@ -81,14 +82,18 @@ test "time[datetime] with a year" do
 	refute_valid_html { time(datetime: "123") }
 end
 
-# test "time[datetime] with duration" do
-# 	assert_valid_html { time(datetime: "P12DT7H12M13S") }
-# 	assert_valid_html { time(datetime: "P12DT7H12M13.3S") }
-# 	assert_valid_html { time(datetime: "P12DT7H12M13.45S") }
-# 	assert_valid_html { time(datetime: "P12DT7H12M13.455S") }
-# 	assert_valid_html { time(datetime: "PT7H12M13S") }
-# 	assert_valid_html { time(datetime: "PT7H12M13.2S") }
-# 	assert_valid_html { time(datetime: "PT7H12M13.56S") }
-# 	assert_valid_html { time(datetime: "PT7H12M13.999S") }
-# 	assert_valid_html { time(datetime: "7d 5h 24m 13s") }
-# end
+test "time[datetime] with duration" do
+	assert_valid_html { time(datetime: "P12DT7H12M13S") }
+	assert_valid_html { time(datetime: "P12DT7H12M13.3S") }
+	assert_valid_html { time(datetime: "P12DT7H12M13.45S") }
+	assert_valid_html { time(datetime: "P12DT7H12M13.455S") }
+	assert_valid_html { time(datetime: "PT7H12M13S") }
+	assert_valid_html { time(datetime: "PT7H12M13.2S") }
+	assert_valid_html { time(datetime: "PT7H12M13.56S") }
+	assert_valid_html { time(datetime: "PT7H12M13.999S") }
+	assert_valid_html { time(datetime: "7d 5h 24m 13s") }
+
+	refute_valid_html { time(datetime: "PT7H12M13.S") }
+	refute_valid_html { time(datetime: "PT7H12M13.56") }
+	refute_valid_html { time(datetime: "7h 5d 24m 13s") }
+end

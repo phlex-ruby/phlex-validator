@@ -12,6 +12,8 @@ module Phlex::Validator::HTML
 			AbstractDayOfMonth,
 			LocalDateTimeString,
 			DateTimeString,
+			DurationString,
+			PeriodString,
 		),
 	}.freeze
 end

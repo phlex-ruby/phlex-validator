@@ -121,6 +121,12 @@ module Phlex::Validator::HTML
 	# YYYY-MM-DDTHH:MM(:SS(.mmm))Z | YYYY-MM-DD HH:MM(:SS(.mmm))Z
 	SPECIFIC_DATE_TIME = /#{SPECIFIC_DATE}(?:T| )#{ABSTRACT_TIME}#{TIME_ZONE_OFFSET}/
 
+	# DDd HHh MMm SSs
+	INFORMAL_DURATION = /\A(?:(\d+d)(?: (\d+h))?(?: (\d+m))?(?: (\d+s))?|(\d+h)(?: (\d+m))?(?: (\d+s))?|(\d+m)(?: (\d+s))?|(\d+s))?\z/
+
+	# PdDThHmMsS
+	PERIOD = /P(?<d>\d+D)?T(?<h>\d+H)?(?<m>\d+M)?(?<s>\d+(?:\.\d{1,3})?S)/
+
 	AbstractDayOfMonth = _String(/\A#{ABSTRACT_DAY_OF_MONTH}\z/)
 	AbstractTime = _String(/\A#{ABSTRACT_TIME}\z/)
 
@@ -140,9 +146,8 @@ module Phlex::Validator::HTML
 				true
 			else
 				first_day_of_year = (1 + (5 * ((year - 1) % 4)) + (4 * ((year - 1) % 100)) + (6 * ((year - 1) % 400))) % 7
-				leap_year = (year % 400 == 0) || (year % 4 == 0 && year % 100 != 0)
 
-				first_day_of_year == 4 || (first_day_of_year == 3 && leap_year)
+				first_day_of_year == 4 || (first_day_of_year == 3 && leap_year?(year))
 			end
 		}
 	)
@@ -172,19 +177,21 @@ module Phlex::Validator::HTML
 	)
 
 	LocalDateTimeString = _String(
-		Pattern(/\A#{SPECIFIC_LOCAL_DATE_TIME}\z/) { |yyyy:, mm:, dd:, h:, m:, s:, ms:|
+		Pattern(/\A#{SPECIFIC_LOCAL_DATE_TIME}\z/) { |yyyy:, mm:, dd:, **|
 			valid_date?(yyyy.to_i, mm.to_i, dd.to_i)
 		}
 	)
 
 	DateTimeString = _String(
-		Pattern(/\A#{SPECIFIC_DATE_TIME}\z/) { |yyyy:, mm:, dd:, h:, m:, s:, ms:|
+		Pattern(/\A#{SPECIFIC_DATE_TIME}\z/) { |yyyy:, mm:, dd:, **|
 			valid_date?(yyyy.to_i, mm.to_i, dd.to_i)
 		}
 	)
 
+	DurationString = _String(/\A#{INFORMAL_DURATION}\z/)
+	PeriodString = _String(/\A#{PERIOD}\z/)
+
 	TimeString = _String(/\A([01][0-9]|2[0-3]):([0-5][0-9])(:[0-5][0-9](\.\d{1,3})?)?\z/)
-	DurationString = _String(/\AP(T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?|(?:(\d+)D)?T?(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?|(?:(\d+)Y)?(?:(\d+)M)?(?:(\d+)D)?)\z/)
 
 	TimeZoneOffset = _String(/\A#{TIME_ZONE_OFFSET}\z/)
 
