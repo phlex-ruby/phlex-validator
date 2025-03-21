@@ -24,7 +24,7 @@ module Phlex::Validator::HTML
 	def self.CommaSeparatedList(type)
 		_Union(
 			type,
-			_Array(type),
+			# _Array(type), # TODO: we can re-introduce this once Phlex supports it
 			_String(-> (it) { it.split(/\s*,\s*/).all?(type) })
 		)
 	end
