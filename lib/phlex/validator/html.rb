@@ -127,7 +127,6 @@ module Phlex::Validator::HTML
 	# PdDThHmMsS
 	PERIOD = /P(?<d>\d+D)?T(?<h>\d+H)?(?<m>\d+M)?(?<s>\d+(?:\.\d{1,3})?S)/
 
-	AbstractDayOfMonth = _String(/\A#{ABSTRACT_DAY_OF_MONTH}\z/)
 	AbstractTime = _String(/\A#{ABSTRACT_TIME}\z/)
 
 	YearString = _String(
@@ -161,6 +160,11 @@ module Phlex::Validator::HTML
 	)
 
 	MONTH_LENGTHS = [nil, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31].freeze
+
+	AbstractDayOfMonth = Pattern(/\A#{ABSTRACT_DAY_OF_MONTH}\z/) do |mm:, dd:|
+		month, day = mm.to_i, dd.to_i
+		day <= MONTH_LENGTHS[month] || (month == 2 && day == 29)
+	end
 
 	def self.leap_year?(year) = year % 400 == 0 || (year % 4 == 0 && year % 100 != 0)
 

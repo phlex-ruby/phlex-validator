@@ -18,6 +18,9 @@ end
 
 test "time[datetime] with abstract day of month" do
 	assert_valid_html { time(datetime: "11-12") }
+	assert_valid_html { time(datetime: "02-29") } # allowed because we don’t know the year
+
+	refute_valid_html { time(datetime: "02-30") }
 end
 
 test "time[datetime] with abstract time" do
