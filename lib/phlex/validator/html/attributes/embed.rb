@@ -2,7 +2,6 @@
 
 module Phlex::Validator::HTML
 	Attributes::Embed = {
-		**Attributes::Global,
 		height: UInt,
 		src: Href,
 		type: MimeType,

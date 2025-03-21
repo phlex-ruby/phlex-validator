@@ -2,7 +2,6 @@
 
 module Phlex::Validator::HTML
 	Attributes::Form = {
-		**Attributes::Global,
 		accept: Deprecated,
 		accept_charset: String, # TODO: comma-separated list of charsets
 		autocomplete: Toggle,

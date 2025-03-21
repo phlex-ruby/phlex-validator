@@ -2,7 +2,6 @@
 
 module Phlex::Validator::HTML
 	Attributes::Body = {
-		**Attributes::Global,
 		onafterprint: JavaScript,
 		onbeforeprint: JavaScript,
 		onbeforeunload: JavaScript,

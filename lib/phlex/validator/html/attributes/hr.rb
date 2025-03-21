@@ -2,7 +2,6 @@
 
 module Phlex::Validator::HTML
 	Attributes::Hr = {
-		**Attributes::Global,
 		align: Deprecated,
 		color: Deprecated,
 		noshade: Deprecated,

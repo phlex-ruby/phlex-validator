@@ -14,7 +14,7 @@ module Phlex::Validator::HTML
 				raise ArgumentError unless Symbol === k
 
 				Literal.check(
-					expected: schema[k] || Attribute,
+					expected: schema[k] || Attributes::Global[k] || Attribute,
 					actual: v
 				)
 			end
@@ -372,6 +372,154 @@ module Phlex::Validator::HTML
 
 		def optgroup(**attributes)
 			__validate__(attributes, Attributes::Global)
+			super
+		end
+
+		def output(**attributes)
+			__validate__(attributes, Attributes::Output)
+			super
+		end
+
+		def p(**attributes)
+			__validate__(attributes, Attributes::Global)
+			super
+		end
+
+		def picture(**attributes)
+			__validate__(attributes, Attributes::Global)
+			super
+		end
+
+		def pre(**attributes)
+			__validate__(attributes, Attributes::Pre)
+		end
+
+		def progress(**attributes)
+			__validate__(attributes, Attributes::Progress)
+			super
+		end
+
+		def q(**attributes)
+			__validate__(attributes, Attributes::Q)
+			super
+		end
+
+		def rp(**attributes)
+			__validate__(attributes, Attributes::Global)
+			super
+		end
+
+		def rt(**attributes)
+			__validate__(attributes, Attributes::Global)
+			super
+		end
+
+		def ruby(**attributes)
+			__validate__(attributes, Attributes::Global)
+			super
+		end
+
+		def s(**attributes)
+			__validate__(attributes, Attributes::Global)
+			super
+		end
+
+		def samp(**attributes)
+			__validate__(attributes, Attributes::Global)
+			super
+		end
+
+		def script(**attributes)
+			__validate__(attributes, Attributes::Script)
+			super
+		end
+
+		def search(**attributes)
+			__validate__(attributes, Attributes::Global)
+		end
+
+		def section(**attributes)
+			__validate__(attributes, Attributes::Global)
+			super
+		end
+
+		def select(**attributes)
+			__validate__(attributes, Attributes::Select)
+			super
+		end
+
+		def slot(**attributes)
+			__validate__(attributes, Attributes::Slot)
+			super
+		end
+
+		def small(**attributes)
+			__validate__(attributes, Attributes::Global)
+			super
+		end
+
+		def source(**attributes)
+			__validate__(attributes, Attributes::Source)
+			super
+		end
+
+		def span(**attributes)
+			__validate__(attributes, Attributes::Global)
+			super
+		end
+
+		def strong(**attributes)
+			__validate__(attributes, Attributes::Global)
+			super
+		end
+
+		def style(**attributes)
+			__validate__(attributes, Attributes::Style)
+			super
+		end
+
+		def sub(**attributes)
+			__validate__(attributes, Attributes::Global)
+			super
+		end
+
+		def summary(**attributes)
+			__validate__(attributes, Attributes::Global)
+			super
+		end
+
+		def sup(**attributes)
+			__validate__(attributes, Attributes::Global)
+			super
+		end
+
+		def table(**attributes)
+			__validate__(attributes, Attributes::Table)
+			super
+		end
+
+		def tbody(**attributes)
+			__validate__(attributes, Attributes::Tbody)
+			super
+		end
+
+		def td(**attributes)
+			__validate__(attributes, Attributes::Td)
+			super
+		end
+
+		def template(**attributes)
+			__validate__(attributes, Attributes::Template)
+			super
+		end
+
+		def textarea(**attributes)
+			__validate__(attributes, Attributes::Textarea)
+			super
+		end
+
+		def tfoot(**attributes)
+			__validate__(attributes, Attributes::Tfoot)
 			super
 		end
 	end

@@ -3,7 +3,6 @@
 module Phlex::Validator::HTML
 	# TODO: We should verify things like min < max, etc.
 	Attributes::Meter = {
-		**Attributes::Global,
 		value: NumericValue,
 		min: NumericValue,
 		max: NumericValue,

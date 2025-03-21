@@ -74,6 +74,7 @@ module Phlex::Validator::HTML
 
 	# An integer or float that’s greater than zero
 	PositiveNumeric = _Constraint(Integer, Float, 0.., _Not(0), _Not(0.0))
+	PositiveInteger = _Integer(1..)
 
 	Step = _Union(Token(:any), PositiveNumeric)
 	TimeString = _String(/\A([01][0-9]|2[0-3]):([0-5][0-9])(:[0-5][0-9](\.\d{1,3})?)?\z/)
@@ -81,9 +82,14 @@ module Phlex::Validator::HTML
 	Tokens = _Union(Token, _Array(Token))
 	UInt = _Integer(0..)
 	AutocompleteNamedGroup = _String(/\Asection-/)
+
+	Hatch = Enum(:open, :closed)
 	Toggle = Enum(:on, :off)
-	EnumeratedBoolean = Enum(:true, :false)
 	Affirmation = Enum(:yes, :no)
+	EnumeratedBoolean = Enum(:true, :false)
+
+	AttributionSource = _Union(_Boolean, String)
+	Blocking = Enum(:render)
 
 	FormEncoding = _Union(
 		"application/x-www-form-urlencoded",

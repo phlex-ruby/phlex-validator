@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 module Phlex::Validator::HTML
-	Attributes::Details = {
-		open: _Boolean,
+	Attributes::Output = {
+		for: SpaceSeparatedList(DOMID),
+		form: DOMID,
 		name: String,
 	}.freeze
 end

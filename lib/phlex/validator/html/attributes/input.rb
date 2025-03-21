@@ -2,7 +2,6 @@
 
 module Phlex::Validator::HTML
 	BaseInputAttributes = {
-		**Attributes::Global,
 		disabled: _Boolean,
 		form: DOMID,
 		name: _String(_Not("isindex")),
@@ -16,7 +15,7 @@ module Phlex::Validator::HTML
 		minlength: UInt,
 		pattern: String,
 		placeholder: String,
-		size: _Integer(1..),
+		size: PositiveInteger,
 	}.freeze
 
 	private_constant :TextishInputAttributes

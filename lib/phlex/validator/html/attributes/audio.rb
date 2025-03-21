@@ -2,7 +2,6 @@
 
 module Phlex::Validator::HTML
 	Attributes::Audio = {
-		**Attributes::Global,
 		autoplay: _Boolean,
 		controls: _Boolean,
 		controlslist: ControlsList,

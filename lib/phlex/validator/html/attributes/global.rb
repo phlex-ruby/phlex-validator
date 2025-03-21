@@ -11,7 +11,7 @@ module Phlex::Validator::HTML
 			:words,
 			:characters
 		),
-		autocorrect: Token,
+		autocorrect: Toggle,
 		autofocus: _Boolean,
 		class: Tokens,
 		contenteditable: Enum(

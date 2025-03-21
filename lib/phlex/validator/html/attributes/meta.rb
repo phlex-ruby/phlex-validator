@@ -3,7 +3,6 @@
 module Phlex::Validator::HTML
 	# TODO: We can validate the content based on the http_equiv value
 	Attributes::Meta = {
-		**Attributes::Global,
 		charset: Token(:utf_8),
 		content: String,
 		http_equiv: Enum(

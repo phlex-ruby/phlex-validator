@@ -2,7 +2,6 @@
 
 module Phlex::Validator::HTML
 	Attributes::Iframe = {
-		**Attributes::Global,
 		allow: String,
 		allowfullscreen: Deprecated,
 		allowpaymentrequest: Deprecated,

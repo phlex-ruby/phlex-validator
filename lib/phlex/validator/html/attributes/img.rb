@@ -2,13 +2,8 @@
 
 module Phlex::Validator::HTML
 	Attributes::Img = {
-		**Attributes::Global,
 		alt: String,
-		attributionsrc: _Union(
-			_Boolean,
-			String, # TODO: a list of urls
-			_Array(String)
-		),
+		attributionsrc: AttributionSource,
 		crossorigin: CrossOrigin,
 		decoding: Enum(
 			:sync,

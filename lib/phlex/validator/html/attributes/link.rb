@@ -3,7 +3,6 @@
 module Phlex::Validator::HTML
 	# todo: revisit for specific inter-dependent validations
 	Attributes::Link = {
-		**Attributes::Global,
 		as: Enum(
 			:audio,
 			:document,
@@ -19,7 +18,7 @@ module Phlex::Validator::HTML
 			:video,
 			:worker,
 		),
-		blocking: Token(:render),
+		blocking: Blocking,
 		crossorigin: CrossOrigin,
 		disabled: _Boolean,
 		fetchpriority: FetchPriority,

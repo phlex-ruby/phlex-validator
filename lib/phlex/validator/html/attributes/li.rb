@@ -2,7 +2,6 @@
 
 module Phlex::Validator::HTML
 	Attributes::Li = {
-		**Attributes::Global,
 		value: Integer,
 		type: Deprecated,
 	}.freeze

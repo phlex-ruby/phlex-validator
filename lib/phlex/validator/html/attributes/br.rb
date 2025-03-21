@@ -2,7 +2,6 @@
 
 module Phlex::Validator::HTML
 	Attributes::Br = {
-		**Attributes::Global,
 		clear: Deprecated,
 	}.freeze
 end

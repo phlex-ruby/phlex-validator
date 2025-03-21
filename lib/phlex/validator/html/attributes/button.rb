@@ -2,7 +2,6 @@
 
 module Phlex::Validator::HTML
 	Attributes::Button = {
-		**Attributes::Global,
 		autofocus: _Boolean,
 		command: _Union(
 			Enum(

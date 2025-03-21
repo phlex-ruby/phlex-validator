@@ -2,7 +2,6 @@
 
 module Phlex::Validator::HTML
 	Attributes::A = {
-		**Attributes::Global,
 		attributionsrc: _Union(_Boolean, Token),
 		download: Token,
 		href: Href,
