@@ -522,5 +522,20 @@ module Phlex::Validator::HTML
 			__validate__(attributes, Attributes::Tfoot)
 			super
 		end
+
+		def th(**attributes)
+			__validate__(attributes, Attributes::Th)
+			super
+		end
+
+		def thead(**attributes)
+			__validate__(attributes, Attributes::Thead)
+			super
+		end
+
+		def time(**attributes)
+			__validate__(attributes, Attributes::Time)
+			super
+		end
 	end
 end

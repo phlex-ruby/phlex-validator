@@ -29,6 +29,18 @@ module Phlex::Validator::HTML
 		)
 	end
 
+	def self.Pattern(regex, &block)
+		raise ArgumentError "Block required for Pattern" unless block
+
+		-> (value) {
+			if (data = regex.match(value))
+				!!block.call(*data.captures, **data.named_captures&.transform_keys(&:to_sym))
+			else
+				false
+			end
+		}
+	end
+
 	# Any attribute allowed by Phlex
 	Attribute = _Union(
 		nil,
@@ -61,10 +73,120 @@ module Phlex::Validator::HTML
 		)
 	)
 
-	DateString = _String(/\A([0-9]{4})-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])\z/)
-	WeekString = _String(/\A([0-9]{4})-W(0[1-9]|[1-4][0-9]|5[0-3])\z/)
-	MonthString = _String(/\A([0-9]{4})-(0[1-9]|1[0-2])\z/)
-	DateTimeString = _String(/\A([0-9]{4})-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):([0-5][0-9])(:[0-5][0-9])?\z/)
+	# YYYY
+	SPECIFIC_YEAR = /(?<yyyy>\d{4,})/
+
+	# MM
+	ABSTRACT_MONTH = /(?<mm>(?:0[1-9]|1[0-2]))/
+
+	# WW
+	ABSTRACT_WEEK = /(?<ww>(?:0[1-9]|[1-4]\d|5[0-3]))/
+
+	# DD
+	ABSTRACT_DAY = /(?<dd>(?:0[1-9]|[1-2]\d|3[0-1]))/
+
+	# YYYY-MM
+	SPECIFIC_MONTH = /#{SPECIFIC_YEAR}-#{ABSTRACT_MONTH}/
+
+	# YYYY-WWW
+	SPECIFIC_WEEK = /#{SPECIFIC_YEAR}-W#{ABSTRACT_WEEK}/
+
+	# YYYY-MM-DD
+	SPECIFIC_DATE = /#{SPECIFIC_YEAR}-#{ABSTRACT_MONTH}-#{ABSTRACT_DAY}/
+
+	# MM-DD
+	ABSTRACT_DAY_OF_MONTH = /#{ABSTRACT_MONTH}-#{ABSTRACT_DAY}/
+
+	# HH
+	ABSTRACT_HOUR = /(?<h>([0-1]\d|2[0-3]))/
+
+	# MM
+	ABSTRACT_MINUTE = /(?<m>([0-5]\d))/
+
+	# SS
+	ABSTRACT_SECOND = /(?<s>([0-5]\d))/
+
+	# mmm
+	ABSTRACT_MILLISECOND = /(?<ms>(?:\d{3}))/
+
+	# HH:MM(:SS(.mmm))
+	ABSTRACT_TIME = /#{ABSTRACT_HOUR}:#{ABSTRACT_MINUTE}(?::#{ABSTRACT_SECOND}(?:\.#{ABSTRACT_MILLISECOND})?)?/
+
+	# +HHMM | -HHMM | +HH:MM | -HH:MM
+	TIME_ZONE_OFFSET = /(?:Z|(?:\+|-)(?:[0-1][0-9]|2[0-3]):?(?:[0-5][0-9]))/
+
+	# YYYY-MM-DDTHH:MM(:SS(.mmm)) | YYYY-MM-DD HH:MM(:SS(.mmm))
+	SPECIFIC_LOCAL_DATE_TIME = /#{SPECIFIC_DATE}(?:T| )#{ABSTRACT_TIME}/
+
+	# YYYY-MM-DDTHH:MM(:SS(.mmm))Z | YYYY-MM-DD HH:MM(:SS(.mmm))Z
+	SPECIFIC_DATE_TIME = /#{SPECIFIC_DATE}(?:T| )#{ABSTRACT_TIME}#{TIME_ZONE_OFFSET}/
+
+	AbstractDayOfMonth = _String(/\A#{ABSTRACT_DAY_OF_MONTH}\z/)
+	AbstractTime = _String(/\A#{ABSTRACT_TIME}\z/)
+
+	YearString = _String(
+		Pattern(/\A#{SPECIFIC_YEAR}\z/) { |yyyy:|
+			yyyy.to_i > 0
+		}
+	)
+
+	WeekString = _String(
+		Pattern(SPECIFIC_WEEK) { |yyyy:, ww:|
+			year, week = yyyy.to_i, ww.to_i
+
+			next false unless year > 0
+
+			if week <= 52
+				true
+			else
+				first_day_of_year = (1 + (5 * ((year - 1) % 4)) + (4 * ((year - 1) % 100)) + (6 * ((year - 1) % 400))) % 7
+				leap_year = (year % 400 == 0) || (year % 4 == 0 && year % 100 != 0)
+
+				first_day_of_year == 4 || (first_day_of_year == 3 && leap_year)
+			end
+		}
+	)
+
+	MonthString = _String(
+		Pattern(/\A#{SPECIFIC_MONTH}\z/) { |yyyy:, mm:|
+			year, month = yyyy.to_i, mm.to_i
+
+			year > 0
+		}
+	)
+
+	MONTH_LENGTHS = [nil, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31].freeze
+
+	def self.leap_year?(year) = year % 400 == 0 || (year % 4 == 0 && year % 100 != 0)
+
+	def self.valid_date?(year, month, day)
+		day <= MONTH_LENGTHS[month] || (
+			month == 2 && day == 29 && leap_year?(year)
+		)
+	end
+
+	DateString = _String(
+		Pattern(/\A#{SPECIFIC_DATE}\z/) { |yyyy:, mm:, dd:|
+			valid_date?(yyyy.to_i, mm.to_i, dd.to_i)
+		}
+	)
+
+	LocalDateTimeString = _String(
+		Pattern(/\A#{SPECIFIC_LOCAL_DATE_TIME}\z/) { |yyyy:, mm:, dd:, h:, m:, s:, ms:|
+			valid_date?(yyyy.to_i, mm.to_i, dd.to_i)
+		}
+	)
+
+	DateTimeString = _String(
+		Pattern(/\A#{SPECIFIC_DATE_TIME}\z/) { |yyyy:, mm:, dd:, h:, m:, s:, ms:|
+			valid_date?(yyyy.to_i, mm.to_i, dd.to_i)
+		}
+	)
+
+	TimeString = _String(/\A([01][0-9]|2[0-3]):([0-5][0-9])(:[0-5][0-9](\.\d{1,3})?)?\z/)
+	DurationString = _String(/\AP(T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?|(?:(\d+)D)?T?(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?|(?:(\d+)Y)?(?:(\d+)M)?(?:(\d+)D)?)\z/)
+
+	TimeZoneOffset = _String(/\A#{TIME_ZONE_OFFSET}\z/)
 
 	Deprecated = _Never
 	JavaScript = Phlex::HTML::SafeObject
@@ -75,9 +197,10 @@ module Phlex::Validator::HTML
 	# An integer or float that’s greater than zero
 	PositiveNumeric = _Constraint(Integer, Float, 0.., _Not(0), _Not(0.0))
 	PositiveInteger = _Integer(1..)
+	RowSpan = _Integer(0..65534)
+	ColSpan = _Integer(0..1000)
 
 	Step = _Union(Token(:any), PositiveNumeric)
-	TimeString = _String(/\A([01][0-9]|2[0-3]):([0-5][0-9])(:[0-5][0-9](\.\d{1,3})?)?\z/)
 	Token = _Union(String, Symbol)
 	Tokens = _Union(Token, _Array(Token))
 	UInt = _Integer(0..)
