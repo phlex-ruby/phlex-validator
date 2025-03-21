@@ -537,5 +537,50 @@ module Phlex::Validator::HTML
 			__validate__(attributes, Attributes::Time)
 			super
 		end
+
+		def title(**attributes)
+			__validate__(attributes, Attributes::Title)
+			super
+		end
+
+		def tr(**attributes)
+			__validate__(attributes, Attributes::Tr)
+			super
+		end
+
+		def track(**attributes)
+			__validate__(attributes, Attributes::Track)
+			super
+		end
+
+		def tt(**attributes)
+			__validate__(attributes, Attributes::Global)
+			super
+		end
+
+		def u(**attributes)
+			__validate__(attributes, Attributes::Global)
+			super
+		end
+
+		def ul(**attributes)
+			__validate__(attributes, Attributes::Ul)
+			super
+		end
+
+		def var(**attributes)
+			__validate__(attributes, Attributes::Global)
+			super
+		end
+
+		def video(**attributes)
+			__validate__(attributes, Attributes::Video)
+			super
+		end
+
+		def wbr(**attributes)
+			__validate__(attributes, Attributes::Global)
+			super
+		end
 	end
 end
