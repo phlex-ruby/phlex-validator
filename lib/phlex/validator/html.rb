@@ -321,6 +321,19 @@ module Phlex::Validator::HTML
 	MimeType = Token
 	DOMID = Token # TODO: We can actually verify that these IDs exist on the page
 
+	FormRel = Enum(
+		:external,
+		:nofollow,
+		:opener,
+		:noopener,
+		:noreferrer,
+		:help,
+		:prev,
+		:next,
+		:search,
+		:license,
+	)
+
 	LinkRel = Enum(
 		:alternate,
 		:author,
