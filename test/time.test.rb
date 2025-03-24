@@ -38,7 +38,7 @@ test "time[datetime] with abstract time" do
 	refute_valid_html { time(datetime: "12:15:52.99") }
 end
 
-test "time[date] with local date and time" do
+test "time[datetime] with local date and time" do
 	assert_valid_html { time(datetime: "2013-12-25 11:12") }
 	assert_valid_html { time(datetime: "1972-07-25 13:43:07") }
 	assert_valid_html { time(datetime: "1941-03-15 07:06:23.678") }
