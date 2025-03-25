@@ -11,6 +11,6 @@ module Phlex::Validator::HTML
 		enctype: FormEncoding,
 		method: FormMethod,
 		novalidate: _Boolean,
-		target: Target, # TODO: this may need to be a custom enumeration
+		target: Target,
 	}.freeze
 end

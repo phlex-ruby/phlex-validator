@@ -287,6 +287,14 @@ module Phlex::Validator::HTML
 		"text/plain",
 	)
 
+	Target = _Union(
+		"_self",
+		"_blank",
+		"_parent",
+		"_top",
+		"_unfencedTop"
+	)
+
 	PopoverTargetAction = Enum(
 		:hide,
 		:show,
@@ -317,7 +325,6 @@ module Phlex::Validator::HTML
 	ReferrerPolicy = Tokens
 	ControlsList = Tokens # TODO: https://wicg.github.io/controls-list/explainer.html
 	ARel = Token
-	Target = Token
 	MimeType = Token
 	DOMID = Token # TODO: We can actually verify that these IDs exist on the page
 
