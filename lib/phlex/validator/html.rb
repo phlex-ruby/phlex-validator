@@ -307,8 +307,8 @@ module Phlex::Validator::HTML
 	)
 
 	FetchPriority = Enum(
-		:high,
 		:low,
+		:high,
 		:auto,
 	)
 
@@ -324,9 +324,28 @@ module Phlex::Validator::HTML
 	Language = String
 	ReferrerPolicy = Tokens
 	ControlsList = Tokens # TODO: https://wicg.github.io/controls-list/explainer.html
-	ARel = Token
-	MimeType = Token
-	DOMID = Token # TODO: We can actually verify that these IDs exist on the page
+	MimeType = String
+	DOMID = String # TODO: We can actually verify that these IDs exist on the page
+
+	ARel = Enum(
+		:alternate,
+		:author,
+		:bookmark,
+		:external,
+		:help,
+		:license,
+		:me,
+		:next,
+		:nofollow,
+		:noopener,
+		:noreferrer,
+		:opener,
+		:prev,
+		:privacy_policy,
+		:search,
+		:tag,
+		:terms_of_service
+	)
 
 	FormRel = Enum(
 		:external,
