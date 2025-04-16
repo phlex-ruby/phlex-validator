@@ -72,6 +72,7 @@ test "time[datetime] with week" do
 	assert_valid_html { time(datetime: "2015-W53") }
 	assert_valid_html { time(datetime: "2020-W53") } # leap year
 
+	refute_valid_html { time(datetime: "2021-W53") } # not a leap year
 	refute_valid_html { time(datetime: "2013-W1") }
 	refute_valid_html { time(datetime: "2013-W54") }
 end
