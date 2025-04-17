@@ -262,8 +262,9 @@ module Phlex::Validator::HTML
 	NumericValue = _Union(Integer, Float, NumericString)
 
 	# An integer or float that’s greater than zero
-	PositiveNumeric = _Constraint(Integer, Float, 0.., _Not(0), _Not(0.0))
 	PositiveInteger = _Integer(1..)
+	PositiveFloat = _Float(0.., _Not(0.0))
+	PositiveNumeric = _Union(PositiveInteger, PositiveFloat)
 	RowSpan = _Integer(0..65534)
 	ColSpan = _Integer(0..1000)
 
