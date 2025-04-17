@@ -585,8 +585,11 @@ module Phlex::Validator::HTML
 			target: Target,
 			type: MimeType,
 		}.freeze,
+
 		abbr: GlobalAttributes,
+
 		address: GlobalAttributes,
+
 		area: {
 			alt: String,
 			# TODO: define coords dynamically
@@ -603,8 +606,11 @@ module Phlex::Validator::HTML
 			),
 			target: Target,
 		}.freeze,
+
 		article: GlobalAttributes,
+
 		aside: GlobalAttributes,
+
 		audio: {
 			autoplay: _Boolean,
 			controls: _Boolean,
@@ -620,18 +626,24 @@ module Phlex::Validator::HTML
 			),
 			src: String,
 		}.freeze,
+
 		b: GlobalAttributes,
+
 		base: {
 			href: Href,
 			target: Target, # TODO: verify that this is actually the same target as in other cases
 		}.freeze,
+
 		bdi: GlobalAttributes,
+
 		bdo: {
 			dir: TextDirection,
 		}.freeze,
+
 		blockquote: {
 			cite: Href,
 		}.freeze,
+
 		body: {
 			onafterprint: JavaScript,
 			onbeforeprint: JavaScript,
@@ -667,9 +679,11 @@ module Phlex::Validator::HTML
 			topmargin: Deprecated,
 			vlink: Deprecated,
 		}.freeze,
+
 		br: {
 			clear: Deprecated,
 		}.freeze,
+
 		button: {
 			autofocus: _Boolean,
 			command: _Union(
@@ -701,15 +715,20 @@ module Phlex::Validator::HTML
 			),
 			value: String,
 		}.freeze,
+
 		canvas: {
 			height: Integer,
 			width: Integer,
 		}.freeze,
+
 		caption: {
 			align: Deprecated,
 		}.freeze,
+
 		cite: GlobalAttributes,
+
 		code: GlobalAttributes,
+
 		col: {
 			span: UInt,
 			align: Deprecated,
@@ -719,51 +738,69 @@ module Phlex::Validator::HTML
 			valign: Deprecated,
 			width: Deprecated,
 		}.freeze,
+
 		data: {
 			value: Value,
 		}.freeze,
+
 		datalist: GlobalAttributes,
+
 		dd: GlobalAttributes,
+
 		del: {
 			cite: Href,
 			datetime: DateTimeString,
 		}.freeze,
+
 		details: {
 			open: _Boolean,
 			name: String,
 		}.freeze,
+
 		dfn: {
 			title: String,
 		}.freeze,
+
 		dialog: {
 			tabindex: _Never,
 			open: _Boolean,
 		}.freeze,
+
 		div: {
 			align: Deprecated,
 		}.freeze,
+
 		dl: GlobalAttributes,
+
 		dt: GlobalAttributes,
+
 		em: GlobalAttributes,
+
 		embed: {
 			height: UInt,
 			src: Href,
 			type: MimeType,
 			width: UInt,
 		}.freeze,
+
 		fencedframe: {
 			allow: String,
 			height: UInt,
 			width: UInt,
 		}.freeze,
+
 		fieldset: {
 			disabled: _Boolean,
 			form: DOMID,
 			name: String,
 		}.freeze,
+
 		figcaption: GlobalAttributes,
+
 		figure: GlobalAttributes,
+
 		footer: GlobalAttributes,
+
 		form: {
 			accept: Deprecated,
 			accept_charset: String, # TODO: comma-separated list of charsets
@@ -776,17 +813,27 @@ module Phlex::Validator::HTML
 			novalidate: _Boolean,
 			target: Target,
 		}.freeze,
+
 		h1: GlobalAttributes,
+
 		h2: GlobalAttributes,
+
 		h3: GlobalAttributes,
+
 		h4: GlobalAttributes,
+
 		h5: GlobalAttributes,
+
 		h6: GlobalAttributes,
+
 		head: {
 			profile: Tokens, # TODO: improve this
 		}.freeze,
+
 		header: GlobalAttributes,
+
 		hgroup: GlobalAttributes,
+
 		hr: {
 			align: Deprecated,
 			color: Deprecated,
@@ -794,11 +841,14 @@ module Phlex::Validator::HTML
 			size: Deprecated,
 			width: Deprecated,
 		}.freeze,
+
 		html: {
 			version: Deprecated,
 			xmlns: String,
 		}.freeze,
+
 		i: GlobalAttributes,
+
 		iframe: {
 			allow: String,
 			allowfullscreen: Deprecated,
@@ -839,6 +889,7 @@ module Phlex::Validator::HTML
 			marginwidth: Deprecated,
 			scrolling: Deprecated,
 		}.freeze,
+
 		img: {
 			alt: String,
 			attributionsrc: AttributionSource,
@@ -869,6 +920,7 @@ module Phlex::Validator::HTML
 			name: Deprecated,
 			vspace: Deprecated,
 		}.freeze,
+
 		input: {
 			button: {
 				**BaseInputAttributes,
@@ -1074,19 +1126,25 @@ module Phlex::Validator::HTML
 				step: Step,
 			}.freeze,
 		}.freeze,
+
 		ins: {
 			cite: Href,
 			datetime: DateTimeString,
 		}.freeze,
+
 		kbd: GlobalAttributes,
+
 		label: {
 			for: DOMID,
 		}.freeze,
+
 		legend: GlobalAttributes,
+
 		li: {
 			value: Integer,
 			type: Deprecated,
 		}.freeze,
+
 		link: {
 			as: Enum(
 				:audio,
@@ -1122,12 +1180,17 @@ module Phlex::Validator::HTML
 			charset: Deprecated,
 			rev: Deprecated,
 		}.freeze,
+
 		main: GlobalAttributes,
+
 		map: {
 			name: String,
 		}.freeze,
+
 		mark: GlobalAttributes,
+
 		menu: GlobalAttributes,
+
 		meta: {
 			charset: Token(:utf_8),
 			content: String,
@@ -1141,6 +1204,7 @@ module Phlex::Validator::HTML
 			media: String,
 			name: String,
 		}.freeze,
+
 		meter: {
 			value: NumericValue,
 			min: NumericValue,
@@ -1150,8 +1214,11 @@ module Phlex::Validator::HTML
 			optimum: NumericValue,
 			form: DOMID,
 		}.freeze,
+
 		nav: GlobalAttributes,
+
 		noscript: GlobalAttributes,
+
 		object: {
 			archive: Deprecated,
 			border: Deprecated,
@@ -1168,6 +1235,7 @@ module Phlex::Validator::HTML
 			usemap: Deprecated,
 			width: UInt,
 		}.freeze,
+
 		ol: {
 			reversed: _Boolean,
 			start: UInt,
@@ -1179,36 +1247,50 @@ module Phlex::Validator::HTML
 				"I"
 			),
 		}.freeze,
+
 		optgroup: GlobalAttributes,
+
 		option: {
 			disabled: _Boolean,
 			label: String,
 			selected: _Boolean,
 			value: String,
 		}.freeze,
+
 		output: {
 			for: SpaceSeparatedList(DOMID),
 			form: DOMID,
 			name: String,
 		}.freeze,
+
 		p: GlobalAttributes,
+
 		picture: GlobalAttributes,
+
 		pre: {
 			width: Deprecated,
 			wrap: Deprecated,
 		}.freeze,
+
 		progress: {
 			value: PositiveNumeric,
 			max: PositiveNumeric,
 		}.freeze,
+
 		q: {
 			cite: Href,
 		}.freeze,
+
 		rp: GlobalAttributes,
+
 		rt: GlobalAttributes,
+
 		ruby: GlobalAttributes,
+
 		s: GlobalAttributes,
+
 		samp: GlobalAttributes,
+
 		script: {
 			async: _Boolean,
 			attributionsrc: AttributionSource,
@@ -1229,8 +1311,11 @@ module Phlex::Validator::HTML
 			charset: Deprecated,
 			language: Deprecated,
 		}.freeze,
+
 		search: GlobalAttributes,
+
 		section: GlobalAttributes,
+
 		select: {
 			autocomplete: Autocomplete,
 			autofocus: _Boolean,
@@ -1241,10 +1326,13 @@ module Phlex::Validator::HTML
 			required: _Boolean,
 			size: UInt,
 		}.freeze,
+
 		slot: {
 			name: String,
 		}.freeze,
+
 		small: GlobalAttributes,
+
 		source: {
 			type: MimeType,
 			src: Href,
@@ -1254,8 +1342,11 @@ module Phlex::Validator::HTML
 			height: UInt,
 			width: UInt,
 		}.freeze,
+
 		span: GlobalAttributes,
+
 		strong: GlobalAttributes,
+
 		style: {
 			blocking: Blocking,
 			media: String,
@@ -1263,9 +1354,13 @@ module Phlex::Validator::HTML
 			title: String,
 			type: Deprecated,
 		}.freeze,
+
 		sub: GlobalAttributes,
+
 		summary: GlobalAttributes,
+
 		sup: GlobalAttributes,
+
 		table: {
 			align: Deprecated,
 			bgcolor: Deprecated,
@@ -1277,6 +1372,7 @@ module Phlex::Validator::HTML
 			summary: Deprecated,
 			width: Deprecated,
 		}.freeze,
+
 		tbody: {
 			align: Deprecated,
 			bgcolor: Deprecated,
@@ -1284,6 +1380,7 @@ module Phlex::Validator::HTML
 			charoff: Deprecated,
 			valign: Deprecated,
 		}.freeze,
+
 		td: {
 			colspan: ColSpan,
 			headers: SpaceSeparatedList(DOMID),
@@ -1299,12 +1396,14 @@ module Phlex::Validator::HTML
 			valign: Deprecated,
 			width: Deprecated,
 		}.freeze,
+
 		template: {
 			shadowrootmode: Hatch,
 			shadowrootclonable: _Boolean,
 			shadowrootdelegatesfocus: _Boolean,
 			shadowrootserializable: _Boolean,
 		}.freeze,
+
 		textarea: {
 			autocomplete: Autocomplete,
 			cols: PositiveInteger,
@@ -1321,6 +1420,7 @@ module Phlex::Validator::HTML
 			spellcheck: Enum(:true, :false, :default),
 			wrap: Enum(:hard, :soft),
 		}.freeze,
+
 		tfoot: {
 			align: Deprecated,
 			bgcolor: Deprecated,
@@ -1328,6 +1428,7 @@ module Phlex::Validator::HTML
 			charoff: Deprecated,
 			valign: Deprecated,
 		}.freeze,
+
 		th: {
 			abbr: String,
 			colspan: ColSpan,
@@ -1348,6 +1449,7 @@ module Phlex::Validator::HTML
 			valign: Deprecated,
 			width: Deprecated,
 		}.freeze,
+
 		thead: {
 			align: Deprecated,
 			bgcolor: Deprecated,
@@ -1355,6 +1457,7 @@ module Phlex::Validator::HTML
 			charoff: Deprecated,
 			valign: Deprecated,
 		}.freeze,
+
 		time: {
 			datetime: _Union(
 				YearString,
@@ -1370,6 +1473,7 @@ module Phlex::Validator::HTML
 				PeriodString,
 			),
 		}.freeze,
+
 		tr: {
 			align: Deprecated,
 			bgcolor: Deprecated,
@@ -1377,6 +1481,7 @@ module Phlex::Validator::HTML
 			charoff: Deprecated,
 			valign: Deprecated,
 		}.freeze,
+
 		track: {
 			default: _Boolean,
 			kind: Enum(:subtitles, :captions, :chapters, :metadata),
@@ -1384,13 +1489,18 @@ module Phlex::Validator::HTML
 			src: Href,
 			srclang: BCP47Language,
 		}.freeze,
+
 		tt: GlobalAttributes,
+
 		u: GlobalAttributes,
+
 		ul: {
 			compact: Deprecated,
 			type: Deprecated,
 		}.freeze,
+
 		var: GlobalAttributes,
+
 		video: {
 			autoplay: _Boolean,
 			controls: _Boolean,
@@ -1407,6 +1517,7 @@ module Phlex::Validator::HTML
 			src: Href,
 			width: UInt,
 		}.freeze,
+
 		wbr: GlobalAttributes,
 	}.freeze
 end
