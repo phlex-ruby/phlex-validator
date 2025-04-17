@@ -22,7 +22,7 @@ $LOAD_PATH.unshift(File.expand_path("../fixtures", __dir__))
 
 class Quickdraw::Test
 	def refute_valid_html(&block)
-		assert_raises Literal::TypeError do
+		assert_raises TypeError do
 			phlex(&block)
 		end
 	end

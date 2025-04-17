@@ -1320,7 +1320,7 @@ module Phlex::Validator::HTML
 			rows: PositiveInteger,
 			spellcheck: Enum(:true, :false, :default),
 			wrap: Enum(:hard, :soft),
-		},
+		}.freeze,
 		tfoot: {
 			align: Deprecated,
 			bgcolor: Deprecated,
